@@ -50,7 +50,7 @@ console.log(userObj.fullName ());
  *
  * При выполнении задачи не используйте оператор if, требуется решение с логическим оператором ||.
  */
-function defUpperStr(str) {return str || 'Default text'.toUpperCase();}
+function defUpperStr(str) {return (str || 'Default text').toUpperCase();}
 
 console.log(defUpperStr());
 console.log(defUpperStr('My text'));
@@ -79,7 +79,7 @@ console.log(defUpperStr('My text'));
  * evenFn(20) → [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
  */
 function evenFn(n) {
-    var arr = [];
+    let arr = [];
     for (let i = 1; i <= n; i++) if (i % 2 === 0) arr.push(i);
 return arr;
 }
@@ -229,13 +229,18 @@ console.log('130 :', ageClassification(130)); // 130 : null
  * oddFn(15) → [1, 3, 5, 7, 9, 11, 13, 15]
  * oddFn(20) → [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
  */
+function oddFn(n) {
+    let arr = [];
+    let i = 0;
+    while (i++ < n) if (i % 2 !== 0) arr.push(i);
+return arr;
+}
 
+console.log(oddFn(10)); // [1, 3, 5, 7, 9]
 
-// console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
 
-// console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-
-// console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 
 /*
  * #8
@@ -248,6 +253,10 @@ console.log('130 :', ageClassification(130)); // 130 : null
  * Реализуйте проверку: если третьим параметром передается не функция, нужно вернуть false.
  *
  */
+function mainFunc(a, b, func) {
+    if (func && typeof func === 'function') return func(a, b);
+   return false;
+}
 
 /*
  * реализуйте следующие функции, которые будут осуществлять механизм callback в основной функции,
@@ -255,11 +264,21 @@ console.log('130 :', ageClassification(130)); // 130 : null
  * для возведения в степень и получения произвольного значения можете воспользоваться методами объекта Math.
  */
 
+
 // cbRandom(a, b) – вычисляет и возвращает произвольное целое число в диапазоне между a и b включительно.
+function cbRandom(a, b) {
+    return Math.floor(Math.random() * (b - a + 1)) + a;
+  }
 
 // cbPow(a, b) – вычисляет и возвращает результат возведения числа a в степень b.
-
+function cbPow(a, b) {
+    return Math.pow(a, b);
+  }
 // cbAdd(a, b) – вычисляет и возвращает сумму двух чисел a и b.
+
+function cbAdd(a, b) {
+    return a + b;
+  }
 
 /*
  * mainFunc() должна возвращать результат работы переданной ей возвратной функции, например:
@@ -270,10 +289,10 @@ console.log('130 :', ageClassification(130)); // 130 : null
  * mainFunc(2, 5, 'not a func') → false
  */
 
-// console.log(mainFunc(2, 5, cbRandom)); // целые числа в диапазоне 2..5
+console.log(mainFunc(2, 5, cbRandom)); // целые числа в диапазоне 2..5
 
-// console.log(mainFunc(2, 5, cbPow)); // 32
+console.log(mainFunc(2, 5, cbPow)); // 32
 
-// console.log(mainFunc(2, 5, cbAdd)); // 7
+console.log(mainFunc(2, 5, cbAdd)); // 7
 
-// console.log(mainFunc(2, 5, 'not a func')); // false
+console.log(mainFunc(2, 5, 'not a func')); // false
